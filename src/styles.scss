@@ -1,1 +1,68 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$PrimeraEntrega_Bazan-Calderon-primary: mat.define-palette(mat.$indigo-palette);
+$PrimeraEntrega_Bazan-Calderon-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$PrimeraEntrega_Bazan-Calderon-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$PrimeraEntrega_Bazan-Calderon-theme: mat.define-light-theme((
+  color: (
+    primary: $PrimeraEntrega_Bazan-Calderon-primary,
+    accent: $PrimeraEntrega_Bazan-Calderon-accent,
+    warn: $PrimeraEntrega_Bazan-Calderon-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($PrimeraEntrega_Bazan-Calderon-theme);
+
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0rem;
+    padding: 0rem;
+    font-family: 'Lato', sans-serif;
+}
+  
+body {
+    &::-webkit-scrollbar {
+        width: 0.5rem;
+        background-color: #d8d8d8;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #b8b8b8;
+        border: 0.1rem solid #bebebe;
+        border-radius: 0.5rem;
+
+        &:hover {
+            background-color: #ececec;
+            transition: all 1s;
+        }
+    }
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

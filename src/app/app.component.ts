@@ -1,10 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'SegundaEntrega_Bazan-Calderon';
+
+export class AppComponent implements OnInit {
+  title = 'Forms-BazanCalderon';
+  login = false
+
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.title = 'Forms-BazanCalderon'
+  }
 }

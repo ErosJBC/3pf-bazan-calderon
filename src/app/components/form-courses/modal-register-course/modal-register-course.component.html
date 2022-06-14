@@ -1,0 +1,42 @@
+<h1 mat-dialog-title>Registro de Curso</h1>
+<div mat-dialog-content>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+        <mat-form-field appearance="outline">
+            <mat-label>Código</mat-label>
+            <input matInput [(ngModel)]="data.id" placeholder="Ej. TP305">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Curso</mat-label>
+            <input matInput [(ngModel)]="data.nameCourse" placeholder="Ej. Estadística Inferencial">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>N° créditos</mat-label>
+            <mat-select matInput [(ngModel)]="data.credits">
+                <mat-option *ngFor="let credit of credits" value="{{credit}}">{{credit}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Tipo de Evaluación</mat-label>
+            <mat-select matInput [(ngModel)]="data.typeEvaluation">
+                <mat-option *ngFor="let type of typeEvaluation" value="{{type}}">{{type}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Cantidad de secciones</mat-label>
+            <mat-select matInput [(ngModel)]="data.sectionTotal">
+                <mat-option *ngFor="let section of sectionTotal" value="{{section}}">{{section}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Cantidad de Vacantes</mat-label>
+            <mat-select matInput [(ngModel)]="data.vacantTotal">
+                <mat-option *ngFor="let vacant of vacantTotal" value="{{vacant}}">{{vacant}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+<div class="flex justify-end" mat-dialog-actions>
+    <button class="bg-red-500 hover:bg-red-400 transition duration-300 text-neutral-50" mat-button (click)="onNoClick()">Cancelar</button>
+    <button class="bg-green-600 hover:bg-green-500 transition duration-300 text-neutral-50" mat-button [mat-dialog-close]="data"
+        cdkFocusInitial>Guardar</button>
+</div>

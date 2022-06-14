@@ -1,0 +1,11 @@
+<div class="pb-5">
+    <h2 class="p-5 text-center text-xl text-slate-900">Presentación de Cards</h2>
+</div>
+<div class="px-10 grid grid-cols-1 gap-8">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-y-4 gap-x-6">
+        <app-infocard class="w-full" *ngFor="let info of listInfo" [info]="info" ></app-infocard>
+    </div>
+    <div class="grid grid-cols1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10">
+        <app-card class="mx-auto" *ngFor="let card of listCard" [card]="card"></app-card>
+    </div>
+</div>

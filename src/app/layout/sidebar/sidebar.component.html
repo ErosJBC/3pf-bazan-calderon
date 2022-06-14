@@ -1,0 +1,23 @@
+<div class="fixed pt-16 h-screen w-20 lg:w-64 bg-neutral-800">
+    <div class="p-2.5 lg:p-8">
+        <img class="rounded-full" src="../../assets/img/profile/photo_user.png" alt="Foto de usuario">
+        <div class="text-center p-1 py-2 lg:pt-5">
+            <span class="text-neutral-50 font-semibold hidden lg:block">Administrador</span>
+            <span class="text-neutral-50 text-sm lg:hidden font-semibold">Admin</span>
+        </div>
+    </div>
+    <hr class="pb-4">
+    <nav class="w-full">
+        <ul class="text-base font-semibold cursor-pointer">
+            <div *ngFor="let is of itemsSidebar" class="">
+                <li class="">
+                    <a class="flex items-center w-full lg:pl-8 p-4 hover:bg-neutral-50 hover:text-zinc-900 hover:border-l-8 border-l-neutral-800 text-neutral-50 transition-all duration-500" routerLink={{is.path}}>
+                        <i class="{{ is.icon }} px-4 lg:px-0"></i>
+                        <span class="px-2 hidden lg:block">{{ is.name }}</span>
+                    </a>
+                </li>
+            </div>
+        </ul>
+    </nav>
+</div>
+

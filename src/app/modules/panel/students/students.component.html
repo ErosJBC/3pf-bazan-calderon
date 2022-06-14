@@ -1,0 +1,75 @@
+<div class="my-5">
+    <div class="px-8 py-5 text-center">
+        <h1 class="text-center">Registro de Alumnos</h1>
+    </div>
+    <app-form-students (registerStudent)="getDataStudent($event)"></app-form-students>
+    <div class="pl-10 max-w-5xl">
+        <mat-form-field class="w-full" appearance="standard">
+            <mat-label>Buscar Alumno</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ejemplo: Eros" #input>
+        </mat-form-field>
+    </div>
+    <div class="overflow-auto px-10 shadow-none mat-elevation-z8">
+        <table mat-table class="w-full text-center" [dataSource]="dataStudents" matSort>
+            <ng-container matColumnDef="id">
+                <th class="bg-zinc-800 text-neutral-50 text-center font-semibold" mat-header-cell *matHeaderCellDef>Código</th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="firstLastname">
+                <th class="bg-zinc-800 text-neutral-50 text-center font-semibold" mat-header-cell *matHeaderCellDef>Apellido Paterno</th>
+                <td mat-cell *matCellDef="let element"> {{element.firstLastname}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="secondLastname">
+                <th class="bg-zinc-800 text-neutral-50 text-center font-semibold" mat-header-cell *matHeaderCellDef>Apellido Materno</th>
+                <td mat-cell *matCellDef="let element"> {{element.secondLastname}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="names">
+                <th class="bg-zinc-800 text-neutral-50 text-center font-semibold" mat-header-cell *matHeaderCellDef>Nombres</th>
+                <td mat-cell *matCellDef="let element"> {{element.names}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="specialty">
+                <th class="bg-zinc-800 text-neutral-50 text-center font-semibold" mat-header-cell *matHeaderCellDef>Especialidad</th>
+                <td mat-cell *matCellDef="let element"> {{element.specialty}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="cycle">
+                <th class="bg-zinc-800 text-neutral-50 text-center font-semibold" mat-header-cell *matHeaderCellDef>Ciclo Relativo</th>
+                <td mat-cell *matCellDef="let element"> {{element.cycle}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <th class="bg-zinc-800 text-neutral-50 text-center font-semibold" mat-header-cell *matHeaderCellDef>Acciones</th>
+                <td mat-cell *matCellDef="let element" class="pr-0">
+                    <button class="bg-cyan-600 hover:bg-cyan-500 text-neutral-50 mr-3" mat-raised-button (click)="seeStudent(element.id)" >
+                        <i class="fa-regular fa-eye mr-1"></i>
+                        <span>Ver</span>
+                    </button>
+                    <button class="bg-amber-400 hover:bg-amber-300 text-neutral-50 mr-3" mat-raised-button (click)="editStudent(element.id)">
+                        <i class="fa-regular fa-pen-to-square mr-1"></i>
+                        <span>Editar</span>
+                    </button>
+                    <button class="bg-red-500 hover:bg-red-400 text-neutral-50" mat-raised-button (click)="deleteStudent(element.id)">
+                        <i class="fa-regular fa-trash-can mr-1"></i>
+                        <span>Eliminar</span>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="tableColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
+
+            <ng-container *ngIf="emptyTable">
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No hay datos para el filtro "{{input.value}}"</td>
+                </tr>
+            </ng-container>
+        </table>
+        <mat-paginator class="bg-neutral-200" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+            aria-label="Select page of students elements">
+        </mat-paginator>
+    </div>
+</div>

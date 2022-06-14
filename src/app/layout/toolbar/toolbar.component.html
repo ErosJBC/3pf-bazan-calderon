@@ -1,0 +1,30 @@
+<header class="bg-neutral-900 fixed z-10 w-full shadow">
+  <mat-toolbar class="bg-neutral-900 flex justify-between items-center">
+    <div class="flex items-center">
+      <button mat-icon-button class="text-white">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="cursor-pointer hover:text-indigo-800 transition-all duration-500 text-white">
+        <a class="flex items-center my-auto">
+          <h1 class="pl-5 lg:pl-8 py-4 text-2xl pr-2">
+            {{ logoToolbar.name }}
+          </h1>
+          <i [class]="'pl-2 text-2xl ' + logoToolbar.icon"></i>
+        </a>
+      </div>
+    </div>
+    <div class="md:flex hidden">
+      <ul class="hidden md:flex items-center pr-6 text-base font-semibold cursor-pointer">
+        <li *ngFor="let nt of navToolbar" class="hover:bg-neutral-700 py-2 px-5 rounded transition-all duration-500">
+          <i class="text-white {{ nt.icon }}"></i>
+          <span class="ml-2 text-white">{{ nt.name }}</span>
+        </li>
+      </ul>
+      <div class="pr-4">
+        <button class="flex items-center bg-indigo-800 hover:bg-indigo-600 font-semibold rounded py-2 px-4 transition-all duration-500">
+          <i class="fa-solid fa-power-off text-white"></i>
+        </button>
+      </div>
+    </div>
+  </mat-toolbar>
+</header>

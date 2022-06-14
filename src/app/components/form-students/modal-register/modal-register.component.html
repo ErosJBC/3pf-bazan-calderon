@@ -1,0 +1,50 @@
+<h1 mat-dialog-title>Registro de Alumno</h1>
+<div mat-dialog-content>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+        <mat-form-field appearance="outline">
+            <mat-label>Código</mat-label>
+            <input matInput [(ngModel)]="data.id" placeholder="Código">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Apellido Paterno</mat-label>
+            <input matInput [(ngModel)]="data.firstLastname" placeholder="Ap. Paterno">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Apellido Materno</mat-label>
+            <input matInput [(ngModel)]="data.secondLastname" placeholder="Ap. Materno">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Nombres</mat-label>
+            <input matInput [(ngModel)]="data.names" placeholder="Nombres">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Ciclo</mat-label>
+            <mat-select matInput [(ngModel)]="data.cycle">
+                <mat-option *ngFor="let cycle of cycles" value="{{cycle}}">{{cycle}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Facultad</mat-label>
+            <mat-select matInput [(ngModel)]="data.faculty">
+                <mat-option *ngFor="let faculty of faculties" value="{{faculty}}">{{faculty}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Especialidad</mat-label>
+            <mat-select matInput [(ngModel)]="data.specialty">
+                <mat-option *ngFor="let specialty of specialties" value="{{specialty}}">{{specialty}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Condición</mat-label>
+            <mat-select matInput [(ngModel)]="data.condition">
+                <mat-option *ngFor="let condition of conditions" value="{{condition}}">{{condition}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+<div class="flex justify-end" mat-dialog-actions>
+    <button class="bg-red-500 hover:bg-red-400 transition duration-300 text-neutral-50" mat-button (click)="onNoClick()">Cancelar</button>
+    <button class="bg-green-600 hover:bg-green-500 transition duration-300 text-neutral-50" mat-button [mat-dialog-close]="data"
+        cdkFocusInitial>Guardar</button>
+</div>

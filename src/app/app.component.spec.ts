@@ -1,13 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
       declarations: [
         AppComponent
       ],
@@ -20,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'SegundaEntrega_Bazan-Calderon'`, () => {
+  it(`should have as title 'Componentes_Bazan-Calderon'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('SegundaEntrega_Bazan-Calderon');
+    expect(app.title).toEqual('Componentes_Bazan-Calderon');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('SegundaEntrega_Bazan-Calderon app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('Componentes_Bazan-Calderon app is running!');
   });
 });
