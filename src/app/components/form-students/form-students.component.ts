@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Student } from '../../models/student.model';
 import { ModalRegisterComponent } from './modal-register/modal-register.component';
+import { StudentsService } from '../../services/students/students.service';
 
 @Component({
   selector: 'app-form-students',
@@ -13,6 +14,7 @@ export class FormStudentsComponent implements OnInit {
 
   student: Student = {
     id: '',
+    codeStudent: '',
     firstLastname: '',
     secondLastname: '',
     names: '',
@@ -35,7 +37,7 @@ export class FormStudentsComponent implements OnInit {
 
     modalRef.afterClosed().subscribe(result => {
       const dataStudent = result
-      if (dataStudent !== undefined && dataStudent.id !== '') {
+      if (dataStudent !== undefined && dataStudent.codeStudent !== '') {
         dataStudent.firstLastname = dataStudent.firstLastname.toUpperCase()
         dataStudent.secondLastname = dataStudent.secondLastname.toUpperCase()
         dataStudent.names = dataStudent.names.toUpperCase()
@@ -44,6 +46,7 @@ export class FormStudentsComponent implements OnInit {
 
       this.student = {
         id: '',
+        codeStudent: '',
         firstLastname: '',
         secondLastname: '',
         names: '',

@@ -1,5 +1,6 @@
 export class Student {
     id: string
+    codeStudent: string
     firstLastname: string
     secondLastname: string
     names: string

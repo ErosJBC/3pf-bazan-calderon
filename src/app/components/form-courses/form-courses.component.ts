@@ -13,6 +13,7 @@ export class FormCoursesComponent implements OnInit {
 
   course: Course = {
     id: '',
+    codeCourse: '',
     nameCourse: '',
     credits: '',
     typeEvaluation: '',
@@ -25,7 +26,7 @@ export class FormCoursesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openFormStudent(): void {
+  openFormCourse(): void {
     const modalRef = this.modal.open(ModalRegisterCourseComponent, {
       width: '50rem',
       data: this.course
@@ -33,13 +34,14 @@ export class FormCoursesComponent implements OnInit {
 
     modalRef.afterClosed().subscribe(result => {
       const dataCourse = result
-      if (dataCourse !== undefined && dataCourse.id !== '') {
+      if (dataCourse !== undefined && dataCourse.codeCourse !== '') {
         dataCourse.nameCourse = dataCourse.nameCourse.toUpperCase()
         this.registerCourse.emit(dataCourse)
       }
 
       this.course = {
         id: '',
+        codeCourse: '',
         nameCourse: '',
         credits: '',
         typeEvaluation: '',

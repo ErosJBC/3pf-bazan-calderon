@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalEditCourseComponent } from '../../../components/form-courses/modal-edit-course/modal-edit-course.component';
+import { CoursesService } from '../../../services/courses/courses.service';
 
 @Component({
   selector: 'app-courses',
@@ -23,7 +24,7 @@ export class CoursesComponent implements OnInit, AfterViewInit {
   }
 
   courses: Course[] = []
-  tableColumns = ['id', 'nameCourse', 'credits', 'typeEvaluation', 'sectionTotal', 'vacantTotal', 'actions']
+  tableColumns = ['codeCourse', 'nameCourse', 'credits', 'typeEvaluation', 'sectionTotal', 'vacantTotal', 'actions']
   emptyTable: boolean
 
   @ViewChild(MatPaginator) paginator: MatPaginator
@@ -31,9 +32,7 @@ export class CoursesComponent implements OnInit, AfterViewInit {
 
   dataCourses = new MatTableDataSource<Course>()
 
-  constructor(public modal: MatDialog) {
-    this.loadLocalStorage()
-    this.loadDataCourses()
+  constructor(public modal: MatDialog, private coursesService: CoursesService) {
   }
 
   ngAfterViewInit(): void {
@@ -42,6 +41,7 @@ export class CoursesComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.getCourses()
   }
 
   applyFilter(event: Event): void {
@@ -53,59 +53,72 @@ export class CoursesComponent implements OnInit, AfterViewInit {
     }
   }
 
-  getDataCourse(course: Course): void {
-    this.courses.push(course)
-    this.dataCourses.data = this.courses
-    this.saveLocalStorage()
+  getCourses = async () => {
+    await this.coursesService.getCoursesList().toPromise().then(
+      (data) => {
+        data.sort((crA, crB) => {
+          if (crA.nameCourse > crB.nameCourse) return 1
+          if (crA.nameCourse < crB.nameCourse) return -1
+          return 0
+        })
+        this.dataCourses.data = data
+      }
+    )
   }
 
-  loadDataCourses(): void {
-    this.emptyTable = false
-    this.dataCourses.data = this.courses
-    this.emptyTable = this.dataCourses.data.length !== 0 ? true : false
+  addCourse(course: Course): void {
+    this.coursesService.createCourse(course).subscribe(
+      (data) => {
+        this.getCourses()
+      }
+    )
   }
 
-  saveLocalStorage(): void {
-    localStorage.setItem('courses', JSON.stringify(this.courses))
-  }
+  // loadDataCourses(): void {
+  //   this.emptyTable = false
+  //   this.dataCourses.data = this.courses
+  //   this.emptyTable = this.dataCourses.data.length !== 0 ? true : false
+  // }
 
-  loadLocalStorage(): void {
-    if (localStorage.getItem('courses') === null) localStorage.setItem('courses', JSON.stringify(this.courses))
-    this.courses = JSON.parse(localStorage.getItem('courses'))
-  }
+  // saveLocalStorage(): void {
+  //   localStorage.setItem('courses', JSON.stringify(this.courses))
+  // }
 
-  editCourse(id: string): void {
+  // loadLocalStorage(): void {
+  //   if (localStorage.getItem('courses') === null) localStorage.setItem('courses', JSON.stringify(this.courses))
+  //   this.courses = JSON.parse(localStorage.getItem('courses'))
+  // }
+
+  editCourse = async (id: string) => {
+    let course: Course
+    await this.coursesService.getCourse(id).toPromise().then(
+      (data) => {
+        course = data
+      }
+    )
     const modalRef = this.modal.open(ModalEditCourseComponent, {
       width: '50rem',
-      data: this.dataCourses.data.filter((course) => course.id === id)[0]
+      data: course
     })
 
     modalRef.afterClosed().subscribe(result => {
-      const dataCourse = result
-      if (dataCourse !== undefined && dataCourse.id !== '') {
-        dataCourse.nameCourse = dataCourse.nameCourse.toUpperCase()
-        this.course = dataCourse
-        for(let i = 0; i < this.courses.length; i++){
-          if (this.courses[i].id === this.course.id) {
-            this.courses[i] = this.course
-            break
-          }
-        }
+      course = result
+      if (course !== undefined && course.codeCourse !== '') {
+        course.nameCourse = course.nameCourse.toUpperCase()
       }
-      this.course = { id: '', nameCourse: '', credits: '', typeEvaluation: '', sectionTotal: '', vacantTotal: '' }
-
-      this.saveLocalStorage()
-      this.loadLocalStorage()
-      this.loadDataCourses()
+      this.coursesService.updateCourse(course, id).subscribe(
+        (data) => {
+          this.getCourses()
+        }
+      )
     })
   }
 
   deleteCourse(id: string): void {
-    const newArrayStudents = this.courses.filter((course) => course.id !== id)
-    this.courses = newArrayStudents
-    this.saveLocalStorage()
-    this.loadLocalStorage()
-    this.loadDataCourses()
+    this.coursesService.deleteCourse(id).toPromise().then(
+      (data) => {
+        this.getCourses()
+      }
+    )
   }
-
 }

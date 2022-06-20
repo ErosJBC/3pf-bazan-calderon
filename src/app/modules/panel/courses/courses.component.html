@@ -2,7 +2,7 @@
     <div class="px-8 py-5 text-center">
         <h1 class="text-center">Registro de Cursos</h1>
     </div>
-    <app-form-courses (registerCourse)="getDataCourse($event)"></app-form-courses>
+    <app-form-courses (registerCourse)="addCourse($event)"></app-form-courses>
     <div class="pl-10 max-w-5xl">
         <mat-form-field class="w-full" appearance="standard">
             <mat-label>Buscar Curso</mat-label>
@@ -11,9 +11,9 @@
     </div>
     <div class="overflow-auto px-10 shadow-none mat-elevation-z8">
         <table mat-table class="w-full text-center" [dataSource]="dataCourses" matSort>
-            <ng-container matColumnDef="id">
+            <ng-container matColumnDef="codeCourse">
                 <th class="bg-zinc-800 text-neutral-50 text-center font-semibold" mat-header-cell *matHeaderCellDef>Código</th>
-                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.codeCourse}} </td>
             </ng-container>
 
             <ng-container matColumnDef="nameCourse">
@@ -64,7 +64,7 @@
                 </tr>
             </ng-container>
         </table>
-        <mat-paginator class="bg-neutral-200" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+        <mat-paginator class="bg-neutral-200" [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons
             aria-label="Select page of students elements">
         </mat-paginator>
     </div>
