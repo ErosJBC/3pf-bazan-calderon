@@ -7,12 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class AppComponent implements OnInit {
-  title = 'Forms-BazanCalderon';
+  title = 'TerceraEntrega-BazanCalderon';
   login = false
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    this.title = 'Forms-BazanCalderon'
+    this.title = 'TerceraEntrega-BazanCalderon'
   }
 }

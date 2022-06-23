@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'Componentes_Bazan-Calderon'`, () => {
+  it(`should have as title 'TerceraEntrega_Bazan-Calderon'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('Componentes_Bazan-Calderon');
+    expect(app.title).toEqual('TerceraEntrega_Bazan-Calderon');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('Componentes_Bazan-Calderon app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('TerceraEntrega_Bazan-Calderon app is running!');
   });
 });

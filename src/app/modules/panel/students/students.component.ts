@@ -14,17 +14,17 @@ import { StudentsService } from '../../../services/students/students.service';
   styleUrls: ['./students.component.scss']
 })
 export class StudentsComponent implements OnInit, AfterViewInit {
-  
+
   students: Student[] = []
-  
+
   tableColumns = ['codeStudent', 'firstLastname', 'secondLastname', 'names', 'specialty', 'cycle', 'actions']
   emptyTable: boolean
 
   @ViewChild(MatPaginator) paginator: MatPaginator
   @ViewChild(MatSort) sort: MatSort
-  
+
   dataStudents = new MatTableDataSource<Student>()
-  
+
   constructor(public modal: MatDialog, private studentsService: StudentsService) {
   }
 
@@ -46,7 +46,7 @@ export class StudentsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  getStudents =  async () => {
+  getStudents = async () => {
     await this.studentsService.getStudentsList().toPromise().then(
       (data) => {
         data.sort((stA, stB) => {
