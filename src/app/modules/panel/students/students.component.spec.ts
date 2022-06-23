@@ -76,17 +76,6 @@ describe('StudentsComponent', () => {
 	})
 
 	it('should call updateStudent method in service when is executed editStudent method in Students component', () => {
-		const student = {
-			id: 'xBIBvUVTYC8977t67V',
-			codeStudent: '20154561G',
-			firstLastname: 'BAZAN',
-			secondLastname: 'CALDERON',
-			names: 'EROS JEANPIERRE',
-			cycle: '-',
-			faculty: 'INGENIERIA INDUSTRIAL Y DE SISTEMAS',
-			specialty: 'INGENIERIA DE SISTEMAS',
-			condition: 'EGRESADO'
-		}
 		const updateSpy = spyOn(studentsService, 'updateStudent').and.returnValue(
 			of(
 				{
@@ -104,5 +93,25 @@ describe('StudentsComponent', () => {
 		)
 		component.editStudent('xBIBvUVTYC8977t67V')
 		expect(updateSpy).toHaveBeenCalled()
+	})
+
+	it('should call getStudent method in service when is executed seeStudent method in Students component', () => {
+		const seeSpy = spyOn(studentsService, 'getStudent').and.returnValue(
+			of(
+				{
+					id: 'xBIBvUVTYC8977t67V',
+					codeStudent: '20154561G',
+					firstLastname: 'BAZAN',
+					secondLastname: 'CALDERON',
+					names: 'EROS JEANPIERRE',
+					cycle: '-',
+					faculty: 'INGENIERIA INDUSTRIAL Y DE SISTEMAS',
+					specialty: 'INGENIERIA DE SISTEMAS',
+					condition: 'EGRESADO'
+				}
+			)
+		)
+		component.seeStudent('xBIBvUVTYC8977t67V')
+		expect(seeSpy).toHaveBeenCalled()
 	})
 });

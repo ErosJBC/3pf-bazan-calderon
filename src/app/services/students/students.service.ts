@@ -8,7 +8,7 @@ import { Student } from '../../models/student.model';
 })
 export class StudentsService {
 
-  private API_STUDENTS_URL = 'https://us-central1-students-api-100.cloudfunctions.net/app/api/v1/students'
+  private API_STUDENTS_URL: string = 'https://us-central1-students-api-100.cloudfunctions.net/app/api/v1/students'
 
   private settingData = {
     headers: new HttpHeaders({
